@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Barın & Baha | Ayın Altındaki Dünya</title>
+<style>
+* {
+    box-sizing: border-box;
+}
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: Georgia, serif;
+    color: #f4efff;
+    background: #080711;
+    text-align: center;
+}
+.stars {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background-image:
+        radial-gradient(2px 2px at 20% 30%, white, transparent),
+        radial-gradient(2px 2px at 70% 20%, #c7b5ff, transparent),
+        radial-gradient(1px 1px at 40% 75%, white, transparent),
+        radial-gradient(2px 2px at 85% 65%, white, transparent),
+        radial-gradient(1px 1px at 15% 85%, #c7b5ff, transparent);
+    background-size: 180px 180px;
+    opacity: 0.7;
+}
+.moon {
+    width: 105px;
+    height: 105px;
+    margin: 65px auto 30px;
+    border-radius: 50%;
+    background: #f5edff;
+    box-shadow: 0 0 35px #b7a0ff, 0 0 90px #6849a8;
+}
+h1 {
+    font-size: clamp(32px, 8vw, 52px);
+    letter-spacing: 3px;
+    margin: 20px 12px;
+}
+.subtitle {
+    color: #b9a7df;
+    font-style: italic;
+    margin: 18px;
+    line-height: 1.8;
+}
+button {
+    margin-top: 25px;
+    padding: 15px 28px;
+    border: 1px solid #bda3ff;
+    border-radius: 30px;
+    background: #211832;
+    color: white;
+    font-size: 16px;
+    font-family: Georgia, serif;
+    cursor: pointer;
+    box-shadow: 0 0 20px #6546a355;
+}
+button:active {
+    transform: scale(0.96);
+}
+#world {
+    display: none;
+    padding: 25px 22px 60px;
+    animation: appear 1.2s ease;
+}
+#intro {
+    padding: 0 15px 65px;
+}
+.characters {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 35px auto;
+    max-width: 500px;
+}
+.character {
+    flex: 1;
+    padding: 25px 10px;
+    border: 1px solid #65518c;
+    border-radius: 18px;
+    background: linear-gradient(160deg, #20182f, #0e0b18);
+}
+.character span {
+    display: block;
+    font-size: 48px;
+    margin-bottom: 15px;
+}
+.character h2 {
+    font-size: 22px;
+}
+.character p {
+    color: #c6b9dd;
+    font-size: 13px;
+    line-height: 1.7;
+}
+.story {
+    max-width: 550px;
+    margin: 35px auto;
+    line-height: 2;
+    color: #ded5ee;
+}
+footer {
+    padding: 25px;
+    color: #8d7ca9;
+    font-size: 12px;
+}
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+</style>
+</head>
+<body>
+<div class="stars"></div>
+<section id="intro">
+    <div class="moon"></div>
+    <p class="subtitle">Bazı bağlar karanlıkta doğar.</p>
+    <h1>Barın & Baha</h1>
+    <p class="subtitle">
+        İki ruh. İki farklı doğa.<br>
+        Aynı gökyüzünün altında bir dünya.
+    </p>
+    <button onclick="enterWorld()">Dünyamıza adım at →</button>
+</section>
+<section id="world">
+    <div class="moon"></div>
+    <h1>Ayın Altındaki Dünya</h1>
+<p class="story">
+    Gecenin sessizliğinde bir kurt uyanır.<br>
+    Uzaklarda, altın renkli bir tilki onu bekler.<br><br>
+    Biri gecenin gücünü taşır.<br>
+    Diğeri kendi ışığını.<br><br>
+    Ve bu dünya, onların hikâyesiyle başlar.
+</p>
+<div class="characters">
+    <div class="character">
+        <span>🐺</span>
+        <h2>Barın</h2>
+        <p>Gecenin kurdu.<br>Özgür, güçlü ve kararlı.</p>
+    </div>
+    <div class="character">
+        <span>🦊</span>
+        <h2>Baha</h2>
+        <p>Altın tilki.<br>Kendi ışığının peşinde.</p>
+    </div>
+</div>
+<p class="story">
+    Bu, henüz anlatılmamış bir hikâye.<br>
+    Devamını siz yazacaksınız.
+</p>
+<button onclick="backToIntro()">Başlangıca dön ↶</button>
+</section>
+<footer>BARIN & BAHA · AYIN ALTINDA</footer>
+<script>
+function enterWorld() {
+    document.getElementById("intro").style.display = "none";
+    document.getElementById("world").style.display = "block";
+    window.scrollTo(0, 0);
+}
+function backToIntro() {
+    document.getElementById("world").style.display = "none";
+    document.getElementById("intro").style.display = "block";
+    window.scrollTo(0, 0);
+}
+</script>
+</body>
+</html>
