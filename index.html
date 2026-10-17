@@ -3,176 +3,1218 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Barın & Baha | Ayın Altındaki Dünya</title>
+<meta name="theme-color" content="#100d17">
+<title>NIGHTFRAME — Webtoon</title>
+
 <style>
+:root {
+  --bg: #100d17;
+  --panel: #191421;
+  --panel2: #21192d;
+  --purple: #a98bff;
+  --pink: #edb5df;
+  --text: #f4effa;
+  --muted: #a79caf;
+  --line: #342840;
+}
+
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-    margin: 0;
-    min-height: 100vh;
-    font-family: Georgia, serif;
-    color: #f4efff;
-    background: #080711;
-    text-align: center;
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  line-height: 1.65;
 }
-.stars {
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    background-image:
-        radial-gradient(2px 2px at 20% 30%, white, transparent),
-        radial-gradient(2px 2px at 70% 20%, #c7b5ff, transparent),
-        radial-gradient(1px 1px at 40% 75%, white, transparent),
-        radial-gradient(2px 2px at 85% 65%, white, transparent),
-        radial-gradient(1px 1px at 15% 85%, #c7b5ff, transparent);
-    background-size: 180px 180px;
-    opacity: 0.7;
+
+button, a {
+  -webkit-tap-highlight-color: transparent;
 }
-.moon {
-    width: 105px;
-    height: 105px;
-    margin: 65px auto 30px;
-    border-radius: 50%;
-    background: #f5edff;
-    box-shadow: 0 0 35px #b7a0ff, 0 0 90px #6849a8;
+
+a {
+  color: inherit;
+  text-decoration: none;
 }
-h1 {
-    font-size: clamp(32px, 8vw, 52px);
-    letter-spacing: 3px;
-    margin: 20px 12px;
-}
-.subtitle {
-    color: #b9a7df;
-    font-style: italic;
-    margin: 18px;
-    line-height: 1.8;
-}
+
 button {
-    margin-top: 25px;
-    padding: 15px 28px;
-    border: 1px solid #bda3ff;
-    border-radius: 30px;
-    background: #211832;
-    color: white;
-    font-size: 16px;
-    font-family: Georgia, serif;
-    cursor: pointer;
-    box-shadow: 0 0 20px #6546a355;
+  font: inherit;
 }
-button:active {
-    transform: scale(0.96);
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 18px;
+  background: rgba(16, 13, 23, .94);
+  backdrop-filter: blur(15px);
+  border-bottom: 1px solid var(--line);
 }
-#world {
-    display: none;
-    padding: 25px 22px 60px;
-    animation: appear 1.2s ease;
+
+.logo {
+  font-size: 19px;
+  font-weight: 900;
+  letter-spacing: 3px;
 }
-#intro {
-    padding: 0 15px 65px;
+
+.logo span {
+  color: var(--purple);
 }
-.characters {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin: 35px auto;
-    max-width: 500px;
+
+.top-label {
+  color: var(--muted);
+  font-size: 10px;
+  letter-spacing: 2px;
 }
-.character {
-    flex: 1;
-    padding: 25px 10px;
-    border: 1px solid #65518c;
-    border-radius: 18px;
-    background: linear-gradient(160deg, #20182f, #0e0b18);
+
+.container {
+  width: min(100% - 32px, 720px);
+  margin: auto;
 }
-.character span {
-    display: block;
-    font-size: 48px;
-    margin-bottom: 15px;
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  min-height: 460px;
+  padding: 26px 20px 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  background:
+    radial-gradient(ellipse at 50% 0%, #493365 0%, transparent 58%),
+    linear-gradient(180deg, #191222 0%, #100d17 100%);
 }
-.character h2 {
-    font-size: 22px;
+
+.hero::before {
+  content: "☾";
+  position: absolute;
+  top: 12px;
+  right: 25px;
+  color: #e5d8ff;
+  font-size: 105px;
+  opacity: .7;
+  line-height: 1;
 }
-.character p {
-    color: #c6b9dd;
-    font-size: 13px;
-    line-height: 1.7;
+
+.hero-art {
+  position: absolute;
+  inset: 70px 12px 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  pointer-events: none;
 }
-.story {
-    max-width: 550px;
-    margin: 35px auto;
-    line-height: 2;
-    color: #ded5ee;
+
+.hero-art img {
+  width: 49%;
+  max-height: 290px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 18px #000);
 }
+
+.hero-art img:first-child {
+  transform: translateX(12px) rotate(-4deg);
+}
+
+.hero-art img:last-child {
+  transform: translateX(-12px) rotate(4deg);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  padding-top: 240px;
+  background: linear-gradient(
+    0deg,
+    rgba(16,13,23,1) 0%,
+    rgba(16,13,23,.93) 70%,
+    transparent 100%
+  );
+}
+
+.eyebrow {
+  color: var(--pink);
+  font-size: 10px;
+  letter-spacing: 3px;
+  font-weight: 800;
+}
+
+.hero h1 {
+  margin: 7px 0;
+  font-size: clamp(29px, 8vw, 43px);
+  line-height: 1.1;
+  letter-spacing: -1.5px;
+}
+
+.hero p {
+  color: #d0c6da;
+  font-size: 13px;
+  max-width: 440px;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin: 15px 0 20px;
+}
+
+.tag {
+  padding: 5px 10px;
+  border: 1px solid #574269;
+  border-radius: 4px;
+  color: #ded0ff;
+  font-size: 10px;
+}
+
+.primary {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 13px 19px;
+  border: 0;
+  border-radius: 5px;
+  background: var(--purple);
+  color: #160e20;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.secondary {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 16px;
+  border: 1px solid #4b3b5b;
+  border-radius: 5px;
+  color: var(--text);
+  background: transparent;
+  cursor: pointer;
+}
+
+.section {
+  padding: 27px 0;
+}
+
+.section-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.section-heading h2 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.section-heading small {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.info-card {
+  padding: 19px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 9px;
+}
+
+.info-card p {
+  margin: 8px 0;
+  color: #c6bdcf;
+  font-size: 13px;
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 12px;
+}
+
+.info-row:last-child {
+  border-bottom: 0;
+}
+
+.info-row span:first-child {
+  color: var(--muted);
+}
+
+.chapter-list {
+  display: grid;
+  gap: 10px;
+}
+
+.chapter {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 13px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+  cursor: pointer;
+  transition: border-color .2s, background .2s;
+}
+
+.chapter:active {
+  background: var(--panel2);
+}
+
+.chapter-number {
+  width: 43px;
+  height: 53px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 4px;
+  background: linear-gradient(145deg, #4a335e, #20182d);
+  color: #e1d2ff;
+  font-weight: 900;
+}
+
+.chapter-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.chapter-info strong {
+  display: block;
+  font-size: 13px;
+}
+
+.chapter-info small {
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.arrow {
+  color: var(--purple);
+  font-size: 20px;
+}
+
+.notice {
+  padding: 15px;
+  border-left: 2px solid var(--purple);
+  background: #191421;
+  color: #bfb3ce;
+  font-size: 12px;
+}
+
 footer {
-    padding: 25px;
-    color: #8d7ca9;
-    font-size: 12px;
+  padding: 25px 16px 35px;
+  border-top: 1px solid var(--line);
+  text-align: center;
+  color: var(--muted);
+  font-size: 10px;
+  letter-spacing: 1px;
 }
-@keyframes appear {
-    from {
-        opacity: 0;
-        transform: translateY(15px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+
+/* OKUMA EKRANI */
+
+#reader {
+  display: none;
+  min-height: 100vh;
+  background: #0b090e;
+}
+
+.reader-top {
+  position: sticky;
+  top: 0;
+  z-index: 8;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 12px 14px;
+  background: rgba(15,12,19,.96);
+  border-bottom: 1px solid #29202f;
+}
+
+.reader-top button {
+  border: 0;
+  background: none;
+  color: var(--text);
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.reader-title {
+  text-align: center;
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.reader-content {
+  max-width: 600px;
+  margin: auto;
+  padding-bottom: 35px;
+}
+
+.chapter-title {
+  padding: 40px 25px 28px;
+  text-align: center;
+}
+
+.chapter-title small {
+  color: var(--pink);
+  letter-spacing: 3px;
+  font-size: 10px;
+}
+
+.chapter-title h2 {
+  margin: 8px 0;
+  font-size: 29px;
+  line-height: 1.2;
+}
+
+.chapter-title p {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.panel {
+  position: relative;
+  min-height: 180px;
+  margin: 0 0 3px;
+  padding: 24px 19px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background: #17121e;
+  text-align: center;
+}
+
+.panel.dark {
+  background:
+    radial-gradient(ellipse at 50% 20%, #3c2b50, transparent 65%),
+    #0c0a11;
+}
+
+.panel.tall {
+  min-height: 300px;
+}
+
+.panel .scene-label {
+  color: #bba1e6;
+  font-size: 9px;
+  letter-spacing: 3px;
+  margin-bottom: 13px;
+}
+
+.panel .narration {
+  max-width: 410px;
+  color: #d1c7d9;
+  font-family: Georgia, serif;
+  font-size: 14px;
+  font-style: italic;
+}
+
+.panel .dialogue {
+  max-width: 430px;
+  margin: 10px 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.panel .speaker {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--pink);
+  font-size: 10px;
+  letter-spacing: 2px;
+}
+
+.panel img {
+  display: block;
+  max-width: 90%;
+  max-height: 430px;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 18px #000);
+}
+
+.panel .symbol {
+  font-size: 65px;
+  line-height: 1.2;
+  margin: 10px 0;
+}
+
+.panel .emphasis {
+  font-size: 23px;
+  font-weight: 900;
+  letter-spacing: 1px;
+}
+
+.panel .small-text {
+  color: #a99db6;
+  font-size: 11px;
+}
+
+.reader-end {
+  padding: 30px 20px;
+  text-align: center;
+}
+
+.reader-end h3 {
+  font-size: 20px;
+}
+
+.reader-end p {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.reader-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+@media (min-width: 600px) {
+  .hero {
+    border-radius: 0 0 12px 12px;
+    margin-top: 15px;
+  }
+
+  .hero-art img {
+    max-height: 330px;
+  }
+
+  .panel {
+    min-height: 230px;
+    padding: 35px;
+  }
+
+  .panel.tall {
+    min-height: 390px;
+  }
 }
 </style>
 </head>
+
 <body>
-<div class="stars"></div>
-<section id="intro">
-    <div class="moon"></div>
-    <p class="subtitle">Bazı bağlar karanlıkta doğar.</p>
-    <h1>Barın & Baha</h1>
-    <p class="subtitle">
-        İki ruh. İki farklı doğa.<br>
-        Aynı gökyüzünün altında bir dünya.
-    </p>
-    <button onclick="enterWorld()">Dünyamıza adım at →</button>
-</section>
-<section id="world">
-    <div class="moon"></div>
-    <h1>Ayın Altındaki Dünya</h1>
-<p class="story">
-    Gecenin sessizliğinde bir kurt uyanır.<br>
-    Uzaklarda, altın renkli bir tilki onu bekler.<br><br>
-    Biri gecenin gücünü taşır.<br>
-    Diğeri kendi ışığını.<br><br>
-    Ve bu dünya, onların hikâyesiyle başlar.
-</p>
-<div class="characters">
-    <div class="character">
-        <span>🐺</span>
-        <h2>Barın</h2>
-        <p>Gecenin kurdu.<br>Özgür, güçlü ve kararlı.</p>
+
+<header class="topbar">
+  <a class="logo" href="#" onclick="showHome(); return false;">
+    NIGHT<span>FRAME</span>
+  </a>
+  <span class="top-label">WEBTOON · ORIGINALS</span>
+</header>
+
+<main id="home">
+
+  <section class="hero">
+    <div class="hero-art">
+      <img
+        src="2F2D2519-076B-48C7-9C11-F2922F22822B.jpeg"
+        alt="Hikâyedeki gizemli tilki"
+      >
+      <img
+        src="A080093B-A991-4FE0-A7F5-8E8A146188A7.png"
+        alt="Hikâyedeki gizemli kurt"
+      >
     </div>
-    <div class="character">
-        <span>🦊</span>
-        <h2>Baha</h2>
-        <p>Altın tilki.<br>Kendi ışığının peşinde.</p>
+
+    <div class="hero-content">
+      <div class="eyebrow">✦ NIGHTFRAME ORIGINAL</div>
+      <h1>THE WOLF<br>BENEATH THE MOON</h1>
+
+      <p>
+        Bazı karşılaşmalar tesadüf değildir.
+        Bazı yabancılar ise hayatından çıkmak için
+        fazlasıyla iyi bir neden bulur.
+      </p>
+
+      <div class="tags">
+        <span class="tag">BL</span>
+        <span class="tag">URBAN FANTASY</span>
+        <span class="tag">MYSTERY</span>
+        <span class="tag">SLOW BURN</span>
+      </div>
+
+      <button class="primary" onclick="openChapter(1)">
+        İlk bölümü oku ↗
+      </button>
     </div>
-</div>
-<p class="story">
-    Bu, henüz anlatılmamış bir hikâye.<br>
-    Devamını siz yazacaksınız.
-</p>
-<button onclick="backToIntro()">Başlangıca dön ↶</button>
+  </section>
+
+  <div class="container">
+
+    <section class="section">
+      <div class="section-heading">
+        <h2>Hikâye hakkında</h2>
+        <small>ORIGINAL SERIES</small>
+      </div>
+
+      <div class="info-card">
+        <p>
+          İnsanlarla şekil değiştiricilerin aynı şehirde yaşadığı
+          bir dünyada, yanlış zamanda yanlış yerde bulunan
+          konuşkan bir tilki, hiç tanımadığı bir kurdun koluna girer.
+        </p>
+
+        <p>
+          Küçük bir yalanın birkaç saniyede çözüleceğini düşünür.
+          Oysa o gece başlayan şey, ikisinin de hayatını
+          değiştirecek bir gizemin ilk adımıdır.
+        </p>
+
+        <div class="info-row">
+          <span>Durum</span>
+          <strong>Devam ediyor</strong>
+        </div>
+
+        <div class="info-row">
+          <span>Bölüm sayısı</span>
+          <strong>3 bölüm</strong>
+        </div>
+
+        <div class="info-row">
+          <span>Tür</span>
+          <strong>Fantastik · Romantizm · Gizem</strong>
+        </div>
+
+        <div class="info-row">
+          <span>Okuma biçimi</span>
+          <strong>Dikey kaydırma</strong>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-heading">
+        <h2>Bölümler</h2>
+        <small>READ FROM THE BEGINNING</small>
+      </div>
+
+      <div class="chapter-list">
+
+        <button class="chapter" onclick="openChapter(1)">
+          <span class="chapter-number">01</span>
+          <span class="chapter-info">
+            <strong>Yanlış Kişi, Doğru Zaman</strong>
+            <small>İlk karşılaşma · 8 dk okuma</small>
+          </span>
+          <span class="arrow">›</span>
+        </button>
+
+        <button class="chapter" onclick="openChapter(2)">
+          <span class="chapter-number">02</span>
+          <span class="chapter-info">
+            <strong>Bir Borcun Bedeli</strong>
+            <small>Yeni bir sorun · 6 dk okuma</small>
+          </span>
+          <span class="arrow">›</span>
+        </button>
+
+        <button class="chapter" onclick="openChapter(3)">
+          <span class="chapter-number">03</span>
+          <span class="chapter-info">
+            <strong>Alışılmadık Bir Hitap</strong>
+            <small>Gizli bir yakınlık · 7 dk okuma</small>
+          </span>
+          <span class="arrow">›</span>
+        </button>
+
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="notice">
+        ✦ Yeni bölümler ve hikâyeye ait gizli ayrıntılar
+        zamanla açığa çıkacak. Dikkatli oku; her şey
+        ilk bakışta göründüğü gibi değil.
+      </div>
+    </section>
+
+  </div>
+
+  <footer>
+    NIGHTFRAME © ORIGINAL WEBTOON EXPERIENCE
+  </footer>
+</main>
+
+<!-- MANHWA OKUMA EKRANI -->
+
+<section id="reader">
+
+  <div class="reader-top">
+    <button onclick="showHome()">← Ana sayfa</button>
+    <div class="reader-title" id="readerLabel">BÖLÜM 01</div>
+    <button onclick="window.scrollTo({top:0,behavior:'smooth'})">
+      ↑ Baş
+    </button>
+  </div>
+
+  <article class="reader-content" id="readerContent"></article>
+
 </section>
-<footer>BARIN & BAHA · AYIN ALTINDA</footer>
+
 <script>
-function enterWorld() {
-    document.getElementById("intro").style.display = "none";
-    document.getElementById("world").style.display = "block";
-    window.scrollTo(0, 0);
+const bahaImage =
+  "2F2D2519-076B-48C7-9C11-F2922F22822B.jpeg";
+
+const barinImage =
+  "A080093B-A991-4FE0-A7F5-8E8A146188A7.png";
+
+const chapters = {
+
+1: {
+  title: "Yanlış Kişi, Doğru Zaman",
+  subtitle: "BÖLÜM 01 · THE FIRST ENCOUNTER",
+
+  panels: [
+
+    {
+      type: "dark",
+      label: "23:47 · ŞEHRİN ARKA SOKAKLARI",
+      narration:
+        "Yağmur, neon tabelaların ışığını ıslak asfalta yayıyordu. Şehrin bu saatinde herkesin bir yere yetişmek için bir nedeni vardı. Bazılarınınsa yalnızca kaçmak için."
+    },
+
+    {
+      type: "tall",
+      image: bahaImage,
+      narration:
+        "Peşindeki ayak sesleri yaklaşıyordu. Tilki, arkasına bakmadan sokağın sonuna kadar koştu. Harika. Gerçekten harika. Bir geceyi daha sorunsuz geçirmeyi başaramamıştı."
+    },
+
+    {
+      type: "normal",
+      label: "BAHA · İÇ SES",
+      narration:
+        "Bir çıkış. Bana yalnızca bir çıkış lazım."
+    },
+
+    {
+      type: "dark",
+      label: "TAM O SIRADA…",
+      narration:
+        "Sokağın köşesinden biri çıktı. Uzun boylu, siyah saçlı, kulaklığının tekini takmış bir yabancı. Acele etmiyor, çevresine pek dikkat etmiyor gibiydi."
+    },
+
+    {
+      type: "tall",
+      image: barinImage,
+      narration:
+        "Baha'nın gözleri yabancıya kilitlendi. Bir saniye düşündü. Belki yarım saniye. Sonra kararını verdi."
+    },
+
+    {
+      type: "normal",
+      label: "HİÇ TANIMADIĞI BİRİNE…",
+      dialogue:
+        "AŞKIM! SONUNDA GELDİN!"
+    },
+
+    {
+      type: "dark",
+      label: "YABANCI",
+      narration:
+        "Bir kol kendiliğinden onun koluna dolandı. Yabancı önce kola, sonra yanındaki yüzüne baktı. Kaşlarından biri yavaşça havalandı."
+    },
+
+    {
+      type: "normal",
+      label: "YABANCI",
+      dialogue:
+        "…Aşkım mı?"
+    },
+
+    {
+      type: "normal",
+      label: "BAHA · FISILTıyla",
+      dialogue:
+        "Ne olur oyuna ayak uydur. Sonra açıklarım."
+    },
+
+    {
+      type: "dark",
+      label: "YABANCI",
+      narration:
+        "Yabancı birkaç metre ötede yaklaşan kişilere baktı. Sonra yanındaki tilkiye döndü. Dudaklarının kenarında belli belirsiz bir gülümseme belirdi."
+    },
+
+    {
+      type: "normal",
+      label: "YABANCI",
+      dialogue:
+        "Tabii, balım."
+    },
+
+    {
+      type: "normal",
+      label: "BAHA",
+      narration:
+        "Bir anlığına sustu. Bu cevabı beklemiyordu."
+    },
+
+    {
+      type: "normal",
+      label: "ADAMLARDAN BİRİ",
+      dialogue:
+        "Sen bu çocuğu tanıyor musun?"
+    },
+
+    {
+      type: "dark",
+      label: "YABANCI",
+      dialogue:
+        "Bir sorun mu var?"
+    },
+
+    {
+      type: "normal",
+      narration:
+        "Ses tonu sakindi. Gereğinden fazla sakin. Birkaç saniyelik sessizliğin ardından adamlar birbirlerine bakıp geri çekildiler."
+    },
+
+    {
+      type: "normal",
+      label: "BAHA",
+      dialogue:
+        "Vay be. İyi oyunculuk. Teşekkürler, yabancı."
+    },
+
+    {
+      type: "normal",
+      label: "YABANCI",
+      dialogue:
+        "Rica ederim, yabancı."
+    },
+
+    {
+      type: "normal",
+      label: "BAHA",
+      dialogue:
+        "Bu arada, sevgili rolünde biraz daha iyi olabilirdin."
+    },
+
+    {
+      type: "normal",
+      label: "YABANCI",
+      dialogue:
+        "Bir dahaki sefere daha çok çalışırım."
+    },
+
+    {
+      type: "normal",
+      narration:
+        "Baha güldü, arkasını döndü ve karanlık sokağa karıştı. Birkaç saniye sonra yabancı da yoluna devam etti."
+    },
+
+    {
+      type: "dark",
+      label: "FAKAT…",
+      narration:
+        "Köşeyi döndüğünde yabancı durdu. Az önce karşılaştığı kişilerin peşinde olduğu şeyin ne olduğunu nihayet anlamıştı."
+    },
+
+    {
+      type: "dark",
+      label: "BÖLÜM SONU",
+      emphasis:
+        "BU ARTIK ONUN DA SORUNUYDU.",
+      narration:
+        "Ve tilki, hiç tanımadığı kurdu kendi meselesinin içine çektiğini henüz bilmiyordu."
+    }
+
+  ]
+},
+
+2: {
+  title: "Bir Borcun Bedeli",
+  subtitle: "BÖLÜM 02 · UNWANTED COMPANY",
+
+  panels: [
+
+    {
+      type: "dark",
+      label: "ERTESİ GÜN · 18:26",
+      narration:
+        "Baha dün geceyi unutmuştu. En azından unutmuş gibi davranıyordu. Şehrin kalabalığında yürürken tek düşündüğü şey, eve gitmeden önce yiyecek bir şey bulmaktı."
+    },
+
+    {
+      type: "normal",
+      narration:
+        "Ta ki aynı ses arkasından gelene kadar."
+    },
+
+    {
+      type: "normal",
+      label: "YABANCI",
+      dialogue:
+        "Hey, tilki."
+    },
+
+    {
+      type: "tall",
+      image: barinImage,
+      narration:
+        "Baha durdu. Yavaşça arkasını döndü. Dünkü yabancı, elleri ceplerinde, sanki onu burada bulmayı özellikle planlamış gibi duruyordu."
+    },
+
+    {
+      type: "normal",
+      label: "BAHA",
+      dialogue:
+        "Seninle tekrar karşılaşacağımı düşünmemiştim."
+    },
+
+    {
+      type: "normal",
+      label: "YABANCI",
+      dialogue:
+        "Ben de. Ama dün gece yüzünden başımın belada olduğunu söyleyebilirim."
+    },
+
+    {
+      type: "normal",
+      label: "BAHA",
+      dialogue:
+        "Benim yüzümden mi? Seni kurtardım resmen!"
+    },
+
+    {
+      type: "normal",
+      label: "YABANCI",
+      dialogue:
+        "Ben senden yardım istemedim."
+    },
+
+    {
+      type: "normal",
+      label: "BAHA",
+      dialogue:
+        "Ama sevgilin olmayı kabul ettin."
+    },
+
+    {
+      type: "normal",
+      label: "YABANCI",
+      dialogue:
+        "Bir daha o kelimeyi kullanırsan seni gerçekten orada bırakacağım."
+    },
+
+    {
+      type: "normal",
+      narration:
+        "Baha sırıtıp ellerini kaldırdı. Tam bir şey daha söyleyecekti ki yabancının ifadesi değişti."
+    },
+
+    {
+      type: "dark",
+      label: "YABANCI",
+      narration:
+        "Sokağın karşısında dün geceki adamlardan biri duruyordu. Bu kez yalnız değildi."
+    },
+
+    {
+      type: "normal",
+      label: "BAHA",
+      dialogue:
+        "…Onları tanıyor musun?"
+    },
+
+    {
+      type: "normal",
+      label: "YABANCI",
+      dialogue:
+        "Artık sen de tanıyorsun."
+    },
+
+    {
+      type: "dark",
+      label: "BÖLÜM SONU",
+      emphasis:
+        "KAÇMAYI BIRAK. YANIMDA KAL.",
+      narration:
+        "Baha ilk kez şaka yapmadı. Çünkü yabancının gözlerinde gördüğü şey korku değildi. Bir kararın ağırlığıydı."
+    }
+
+  ]
+},
+
+3: {
+  title: "Alışılmadık Bir Hitap",
+  subtitle: "BÖLÜM 03 · SOMETHING UNFAMILIAR",
+
+  panels: [
+
+    {
+      type: "dark",
+      label: "GECE · TERAS",
+      narration:
+        "Sorun şimdilik geride kalmıştı. Şehir ayaklarının altında ışıldıyordu. Baha, korkuluğa yaslanıp hiç susmadan konuşuyordu."
+    },
+
+    {
+      type: "normal",
+      label: "BAHA",
+      dialogue:
+        "Yani bütün bunlar yüzünden başın belaya girdi ve sen hâlâ buradasın. İlginç bir tercih."
+    },
+
+    {
+      type: "normal",
+      label: "KURT",
+      dialogue:
+        "Sen de hâlâ konuşuyorsun. O da ilginç."
+    },
+
+    {
+      type: "normal",
+      label: "BAHA",
+      dialogue:
+        "Beni seviyorsun bence."
+    },
+
+    {
+      type: "normal",
+      label: "KURT",
+      dialogue:
+        "Kendine fazla güveniyorsun."
+    },
+
+    {
+      type: "normal",
+      narration:
+        "Baha kahkaha attı. Kurt başını başka tarafa çevirdi ama dudaklarının kenarındaki küçük gülümsemeyi saklayamadı."
+    },
+
+    {
+      type: "dark",
+      label: "BİR SÜRE SONRA…",
+      narration:
+        "Rüzgâr sertleşti. Kurt bir an gözlerini kapattı. İçindeki hayvan, sebepsiz yere huzursuzlanmıştı."
+    },
+
+    {
+      type: "normal",
+      narration:
+        "İnsan formunda kalmak onun için normalde kolaydı. Duygularını kontrol etmeyi öğrenmişti. Ama son zamanlarda kontrolü bazen kendi ellerinden kayıyordu."
+    },
+
+    {
+      type: "normal",
+      label: "BAHA",
+      dialogue:
+        "İyi misin?"
+    },
+
+    {
+      type: "normal",
+      label: "KURT",
+      dialogue:
+        "İyiyim."
+    },
+
+    {
+      type: "normal",
+      label: "BAHA",
+      dialogue:
+        "Bunu söylerken yumruğunu sıkıyorsun. Pek ikna edici değil."
+    },
+
+    {
+      type: "normal",
+      narration:
+        "Kurt ona baktı. Bu tilki, insanın söylemediği şeyleri nasıl bu kadar kolay fark edebiliyordu?"
+    },
+
+    {
+      type: "dark",
+      label: "KISA BİR SESSİZLİK",
+      narration:
+        "Baha'nın yüzündeki alaycı ifade yumuşadı. Bu kez sırf onu kızdırmak için konuşmuyordu."
+    },
+
+    {
+      type: "normal",
+      label: "BAHA",
+      dialogue:
+        "Tamam, balım. Anlatmak istemiyorsan sormam."
+    },
+
+    {
+      type: "dark",
+      label: "…",
+      narration:
+        "Kurt hareketsiz kaldı. Bir saniye. İki saniye. Söyleyecek bir şey bulamadı."
+    },
+
+    {
+      type: "normal",
+      label: "BAHA",
+      dialogue:
+        "Ne oldu? Bir şey mi dedim?"
+    },
+
+    {
+      type: "normal",
+      narration:
+        "Kurt yüzünü çevirdi. Kulaklarının ucunda beliren koyu tüyleri gizlemek için kapüşonunu kaldırdı."
+    },
+
+    {
+      type: "normal",
+      label: "KURT",
+      dialogue:
+        "Bir daha öyle seslenme."
+    },
+
+    {
+      type: "normal",
+      label: "BAHA",
+      dialogue:
+        "Neden? Hoşuna mı gitti?"
+    },
+
+    {
+      type: "dark",
+      narration:
+        "Kurt cevap vermedi. Ama gölgesi, ay ışığının altında bir anlığına bir kurdun siluetine dönüştü."
+    },
+
+    {
+      type: "dark",
+      label: "BÖLÜM SONU",
+      emphasis:
+        "TİLKİ ARTIK ŞÜPHELENİYORDU.",
+      narration:
+        "Bu yabancı yalnızca tuhaf değildi. Ve Baha, onun sırlarını öğrenmek istediğini kendine itiraf etmek üzereydi."
+    }
+
+  ]
 }
-function backToIntro() {
-    document.getElementById("world").style.display = "none";
-    document.getElementById("intro").style.display = "block";
-    window.scrollTo(0, 0);
+
+};
+
+function escapeHTML(value) {
+  return String(value).replace(/[&<>"']/g, function(char) {
+    return {
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#39;"
+    }[char];
+  });
+}
+
+function renderPanel(panel) {
+  let html = '<section class="panel ' +
+    (panel.type === "dark" ? "dark " : "") +
+    (panel.type === "tall" ? "tall " : "") + '">';
+
+  if (panel.label) {
+    html += '<div class="scene-label">' +
+      escapeHTML(panel.label) + '</div>';
+  }
+
+  if (panel.image) {
+    html += '<img src="' + panel.image +
+      '" alt="Manhwa karakteri" loading="lazy">';
+  }
+
+  if (panel.symbol) {
+    html += '<div class="symbol">' +
+      escapeHTML(panel.symbol) + '</div>';
+  }
+
+  if (panel.narration) {
+    html += '<p class="narration">' +
+      escapeHTML(panel.narration) + '</p>';
+  }
+
+  if (panel.dialogue) {
+    html += '<div class="dialogue">' +
+      escapeHTML(panel.dialogue) + '</div>';
+  }
+
+  if (panel.emphasis) {
+    html += '<div class="emphasis">' +
+      escapeHTML(panel.emphasis) + '</div>';
+  }
+
+  html += '</section>';
+  return html;
+}
+
+function openChapter(number) {
+  const chapter = chapters[number];
+
+  if (!chapter) return;
+
+  document.getElementById("home").style.display = "none";
+  document.getElementById("reader").style.display = "block";
+
+  document.getElementById("readerLabel").textContent =
+    "BÖLÜM " + String(number).padStart(2, "0");
+
+  let html = `
+    <header class="chapter-title">
+      <small>${escapeHTML(chapter.subtitle)}</small>
+      <h2>${escapeHTML(chapter.title)}</h2>
+      <p>THE WOLF BENEATH THE MOON</p>
+    </header>
+  `;
+
+  chapter.panels.forEach(function(panel) {
+    html += renderPanel(panel);
+  });
+
+  html += `
+    <div class="reader-end">
+      <h3>Bölüm ${String(number).padStart(2, "0")} sona erdi.</h3>
+      <p>Hikâyenin devamı için bir sonraki bölüme geç.</p>
+      <div class="reader-buttons">
+        ${number > 1
+          ? `<button class="secondary" onclick="openChapter(${number - 1})">← Önceki bölüm</button>`
+          : ""}
+        ${number < 3
+          ? `<button class="primary" onclick="openChapter(${number + 1})">Sonraki bölüm →</button>`
+          : `<button class="primary" onclick="showHome()">Ana sayfaya dön ↗</button>`
+        }
+      </div>
+    </div>
+  `;
+
+  document.getElementById("readerContent").innerHTML = html;
+
+  window.scrollTo({ top: 0, behavior: "instant" });
+}
+
+function showHome() {
+  document.getElementById("reader").style.display = "none";
+  document.getElementById("home").style.display = "block";
+  window.scrollTo({ top: 0, behavior: "instant" });
 }
 </script>
+
 </body>
 </html>
